@@ -1,0 +1,11 @@
+name: exercise
+recipe: symfony
+config:
+  php: '8.1'
+  webroot: public
+  database: mariadb
+  xdebug: true
+services:
+  database:
+    portforward: 3308
+    type: mariadb
