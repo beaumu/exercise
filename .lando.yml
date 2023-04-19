@@ -3,9 +3,28 @@ recipe: symfony
 config:
   php: '8.1'
   webroot: public
+  via: nginx
   database: mariadb
   xdebug: true
 services:
   database:
     portforward: 3308
     type: mariadb
+  node:
+    type: node:16
+    build:
+      - npm install
+  appserver_nginx:
+    xdebug: true
+  appserver:
+    xdebug: true
+tooling:
+  npm:
+    service: node
+  node:
+    service: node
+  watch:
+    service: node
+    description: watch frontend code changes
+    cmd:
+      - npm run watch

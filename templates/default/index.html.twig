@@ -2,5 +2,9 @@
 
 {% block body %}
 
-    <div id="root"></div>
+    <div {{ react_component('MainComponent', {
+        controllerName: controllerName
+    }) }}>
+        Loading... <i class="fas fa-cog fa-spin fa-3x"></i>
+    </div>
 {% endblock %}
