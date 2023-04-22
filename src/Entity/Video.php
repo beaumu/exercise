@@ -2,12 +2,12 @@
 
 namespace App\Entity;
 
-use App\Repository\VideoLinkRepository;
+use App\Repository\VideoRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: VideoLinkRepository::class)]
-class VideoLink
+#[ORM\Entity(repositoryClass: VideoRepository::class)]
+class Video
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]

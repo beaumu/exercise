@@ -2,26 +2,26 @@
 
 namespace App\Repository;
 
-use App\Entity\VideoLink;
+use App\Entity\Video;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<VideoLink>
+ * @extends ServiceEntityRepository<Video>
  *
- * @method VideoLink|null find($id, $lockMode = null, $lockVersion = null)
- * @method VideoLink|null findOneBy(array $criteria, array $orderBy = null)
- * @method VideoLink[]    findAll()
- * @method VideoLink[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Video|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Video|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Video[]    findAll()
+ * @method Video[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class VideoLinkRepository extends ServiceEntityRepository
+class VideoRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, VideoLink::class);
+        parent::__construct($registry, Video::class);
     }
 
-    public function save(VideoLink $entity, bool $flush = false): void
+    public function save(Video $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);
 
@@ -30,7 +30,7 @@ class VideoLinkRepository extends ServiceEntityRepository
         }
     }
 
-    public function remove(VideoLink $entity, bool $flush = false): void
+    public function remove(Video $entity, bool $flush = false): void
     {
         $this->getEntityManager()->remove($entity);
 
@@ -40,7 +40,7 @@ class VideoLinkRepository extends ServiceEntityRepository
     }
 
 //    /**
-//     * @return VideoLink[] Returns an array of VideoLink objects
+//     * @return Video[] Returns an array of Video objects
 //     */
 //    public function findByExampleField($value): array
 //    {
@@ -54,7 +54,7 @@ class VideoLinkRepository extends ServiceEntityRepository
 //        ;
 //    }
 
-//    public function findOneBySomeField($value): ?VideoLink
+//    public function findOneBySomeField($value): ?Video
 //    {
 //        return $this->createQueryBuilder('v')
 //            ->andWhere('v.exampleField = :val')
