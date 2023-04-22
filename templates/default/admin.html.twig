@@ -1,18 +1,19 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <nav class="navbar navbar-expand-lg bg-dark">
+    <nav class="navbar navbar-expand-lg bg-black">
         <div class="container-fluid">
             <div class="me-auto">
-                <a class="navbar-brand text-white" href="#">Awesome Video Links</a>
+                <a class="navbar-brand text-white" href="#">Video Administion</a>
             </div>
             <ul class="navbar-nav">
-                <a class="btn btn-warning" href="/admin">Admin</a>
+                <a class="btn btn-warning" href="/">&times;</a>
             </ul>
         </div>
     </nav>
     <main class="container">
-        <div {{ react_component('MainComponent') }}>
+        <div {{ react_component('AdminComponent', {
+        }) }}>
             Loading... <i class="fas fa-cog fa-spin fa-3x"></i>
         </div>
     </main>
