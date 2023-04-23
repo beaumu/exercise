@@ -3,10 +3,9 @@
  */
 
 import React, {Component, Fragment} from 'react';
-import {ListGroup} from 'react-bootstrap';
-import Button from 'react-bootstrap/Button';
-import Card from 'react-bootstrap/Card';
+import {ListGroup, Button, Card, Row, Col} from 'react-bootstrap';
 import ReviewModal from './ReviewModal';
+import LikeButton from './LikeButton';
 
 export default class extends Component {
   constructor(props) {
@@ -58,10 +57,17 @@ export default class extends Component {
               <Card.Body>
                 <Card.Title>{video.title}</Card.Title>
                 <Card.Text>{video.description}</Card.Text>
-                <Button href={video.url}>Watch</Button>
-                <Button variant="link" onClick={() => {
-                  this.showReviewModal(video);
-                }}>Write a review</Button>
+                <Row>
+                  <Col>
+                    <Button href={video.url}>Watch</Button>
+                    <Button variant="link" onClick={() => {
+                      this.showReviewModal(video);
+                    }}>Write a review</Button>
+                  </Col>
+                  <Col className="col-auto">
+                    <LikeButton video={video} />
+                  </Col>
+                </Row>
               </Card.Body>
             </Card>
           );

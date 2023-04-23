@@ -31,8 +31,11 @@ class Video
     private ?string $description = null;
 
     #[ORM\OneToMany(mappedBy: 'video', targetEntity: Review::class, orphanRemoval: true)]
-    #[Groups(['video'])]
     private Collection $reviews;
+
+    #[ORM\Column]
+    #[Groups(['video'])]
+    private ?bool $liked = null;
 
     public function __construct()
     {
@@ -106,6 +109,18 @@ class Video
                 $review->setVideo(null);
             }
         }
+
+        return $this;
+    }
+
+    public function isLiked(): ?bool
+    {
+        return $this->liked;
+    }
+
+    public function setLiked(bool $liked): self
+    {
+        $this->liked = $liked;
 
         return $this;
     }

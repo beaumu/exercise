@@ -71,4 +71,45 @@ class VideoController extends AbstractController
             'groups' => ['video']
         ]);
     }
+
+    /**
+     * See if video is liked
+     *
+     * @param EntityManagerInterface $entityManager
+     * @param int $id
+     * @return JsonResponse
+     */
+    #[Route('/api/videos/{id}/liked', name: 'video_liked', methods: ['GET'])]
+    public function isLiked(EntityManagerInterface $entityManager, int $id): JsonResponse
+    {
+        $video = $entityManager->getRepository(Video::class)->find($id);
+
+        if (is_null($video)) {
+            throw $this->createNotFoundException("Video '$id' not found");
+        }
+
+        return $this->json($video->isLiked());
+    }
+
+    /**
+     * Like/dislike video
+     *
+     * @param EntityManagerInterface $entityManager
+     * @param int $id
+     * @return JsonResponse
+     */
+    #[Route('/api/videos/{id}/liked', name: 'video_like', methods: ['POST'])]
+    public function setLiked(EntityManagerInterface $entityManager, int $id, Request $request): JsonResponse
+    {
+        $video = $entityManager->getRepository(Video::class)->find($id);
+
+        if (is_null($video)) {
+            throw $this->createNotFoundException("Video '$id' not found");
+        }
+
+        $video->setLiked((bool) (int) $request->get('liked'));
+        $entityManager->flush();
+
+        return $this->json($video->isLiked());
+    }
 }
