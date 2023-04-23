@@ -44,18 +44,24 @@ class ReviewController extends AbstractController
      * @param int $videoId
      * @return JsonResponse
      */
-    #[Route('/api/test/videos/{videoId}/reviews', name: 'review_add', methods: ['POST'])]
-    public function add(EntityManagerInterface $entityManager, Request $request, int $videoId): JsonResponse
+    #[Route('/api/videos/{videoId}/reviews', name: 'review_add', methods: ['POST'])]
+    public function add(EntityManagerInterface $entityManager, int $videoId, Request $request): JsonResponse
     {
-        //$video = new Video();
-        //$video->setUrl($request->get('url'));
-        //$video->setTitle($request->get('title'));
-        //$video->setDescription($request->get('description'));
+        $videoRepository = $entityManager->getRepository(Video::class);
+        $video = $videoRepository->find($videoId);
 
-        //$entityManager->persist($video);
-        //$entityManager->flush();
+        $review = new Review();
+        $review->setVideo($video);
+        $review->setAuthor($request->get('author'));
+        $review->setRating($request->get('rating'));
+        $review->setComments($request->get('comments'));
+
+        $entityManager->persist($review);
+        $entityManager->flush();
         
-        //return $this->json($video);
+        return $this->json($review, 200, [], [
+            'groups' => ['review']
+        ]);
     }
 
     /**

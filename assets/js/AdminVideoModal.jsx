@@ -35,13 +35,13 @@ export default class extends Component {
               <Form.Group className="mb-3" controlId="videoUrl">
                 <Form.Label>URL*</Form.Label>
                 <Form.Control type="url" name="url" required={true}
-                  placeholder="Enter Video URL"
+                  placeholder="Enter Video URL" maxLength={2048}
                 />
               </Form.Group>
               <Form.Group className="mb-3" controlId="videoTitle">
                 <Form.Label>Title*</Form.Label>
                 <Form.Control type="text" name="title" required={true}
-                  placeholder="Enter Video Title"
+                  placeholder="Enter Video Title" maxLength={100}
                 />
               </Form.Group>
               <Form.Group className="mb-3" controlId="videoDescription">
