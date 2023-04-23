@@ -28,14 +28,9 @@ class ReviewController extends AbstractController
         $repository = $entityManager->getRepository(Video::class);
         
         if (!is_null($video = $repository->find($videoId))) {
-            return $this->json(array_map(function ($review) {
-                return [
-                    'id' => $review->getId(),
-                    'author' => $review->getAuthor(),
-                    'rating' => $review->getRating(),
-                    'comments' => $review->getComments()
-                ];
-            }, $video->getReviews()->getValues()));
+            return $this->json($video->getReviews(), 200, [], [
+                'groups' => ['review']
+            ]);
         }
         
         return $this->json([]);
@@ -77,11 +72,8 @@ class ReviewController extends AbstractController
         
         $review = $repository->find($id);
                 
-        return $this->json([
-            'id' => $review->getId(),
-            'author' => $review->getAuthor(),
-            'rating' => $review->getRating(),
-            'comments' => $review->getComments()
+        return $this->json($review, 200, [], [
+            'groups' => ['review']
         ]);
     }
 }

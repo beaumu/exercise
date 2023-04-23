@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: VideoRepository::class)]
 class Video
@@ -14,18 +15,23 @@ class Video
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['video'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 2048)]
+    #[Groups(['video'])]
     private ?string $url = null;
 
     #[ORM\Column(length: 100)]
+    #[Groups(['video'])]
     private ?string $title = null;
 
     #[ORM\Column(type: Types::TEXT)]
+    #[Groups(['video'])]
     private ?string $description = null;
 
     #[ORM\OneToMany(mappedBy: 'video', targetEntity: Review::class, orphanRemoval: true)]
+    #[Groups(['video'])]
     private Collection $reviews;
 
     public function __construct()

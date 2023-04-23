@@ -25,14 +25,9 @@ class VideoController extends AbstractController
     {
         $repository = $entityManager->getRepository(Video::class);
 
-        return $this->json(array_map(function ($video) {
-            return [
-                'id' => $video->getId(),
-                'url' => $video->getUrl(),
-                'title' => $video->getTitle(),
-                'description' => $video->getDescription(),
-            ];
-        }, $repository->findAll()));
+        return $this->json($repository->findAll(), 200, [], [
+            'groups' => ['video']
+        ]);
     }
 
     /**
@@ -52,12 +47,9 @@ class VideoController extends AbstractController
 
         $entityManager->persist($video);
         $entityManager->flush();
-        
-        return $this->json([
-            'id' => $video->getId(),
-            'url' => $video->getUrl(),
-            'title' => $video->getTitle(),
-            'description' => $video->getDescription(),
+
+        return $this->json($video, 200, [], [
+            'groups' => ['video']
         ]);
     }
 
@@ -72,16 +64,11 @@ class VideoController extends AbstractController
     public function show(EntityManagerInterface $entityManager, int $id): JsonResponse
     {
         $repository = $entityManager->getRepository(Video::class);
-        
-        if (!is_null($video = $repository->find($id))) {
-            return $this->json([
-                'id' => $video->getId(),
-                'url' => $video->getUrl(),
-                'title' => $video->getTitle(),
-                'description' => $video->getDescription(),
-            ]);
-        }
 
-        return null;
+        $video = $repository->find($id);
+
+        return $this->json($video, 200, [], [
+            'groups' => ['video']
+        ]);
     }
 }
