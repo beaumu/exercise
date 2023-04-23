@@ -20,7 +20,7 @@ class VideoController extends AbstractController
      * @param EntityManagerInterface $entityManager
      * @return JsonResponse
      */
-    #[Route('/api/video-links', name: 'video_list', methods: ['GET'])]
+    #[Route('/api/videos', name: 'video_list', methods: ['GET'])]
     public function list(EntityManagerInterface $entityManager): JsonResponse
     {
         $repository = $entityManager->getRepository(Video::class);
@@ -37,7 +37,7 @@ class VideoController extends AbstractController
      * @param Request $request
      * @return JsonResponse
      */
-    #[Route('/api/video-links', name: 'video_add', methods: ['POST'])]
+    #[Route('/api/videos', name: 'video_add', methods: ['POST'])]
     public function add(EntityManagerInterface $entityManager, Request $request): JsonResponse
     {
         $video = new Video();
@@ -58,7 +58,7 @@ class VideoController extends AbstractController
      * @param int $id
      * @return JsonResponse
      */
-    #[Route('/api/video-links/{id}', name: 'video_show')]
+    #[Route('/api/videos/{id}', name: 'video_show')]
     public function show(EntityManagerInterface $entityManager, int $id): JsonResponse
     {
         $repository = $entityManager->getRepository(Video::class);

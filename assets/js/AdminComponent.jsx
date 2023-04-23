@@ -53,7 +53,7 @@ export default class extends Component {
     params.append('title', data.title);
     params.append('description', data.description);
 
-    return fetch('/api/video-links', {
+    return fetch('/api/videos', {
       method: 'POST',
       body: params
     });
@@ -61,7 +61,7 @@ export default class extends Component {
 
   loadVideos() {
     return new Promise((resolve, reject) => {
-      fetch('/api/video-links').then((response) => {
+      fetch('/api/videos').then((response) => {
         return response.json();
       }).then((jsonData) => {
         resolve(jsonData);

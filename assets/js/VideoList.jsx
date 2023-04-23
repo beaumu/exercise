@@ -18,7 +18,7 @@ export default class extends Component {
   }
 
   componentDidMount() {
-    fetch('/api/video-links').then((response) => {
+    fetch('/api/videos').then((response) => {
       return response.json();
     }).then((jsonData) => {
       this.setState({
