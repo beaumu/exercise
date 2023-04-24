@@ -9,7 +9,7 @@
  */
 
 import React, {Component} from 'react';
-import {Modal, Form, Button} from 'react-bootstrap';
+import {Modal, Form, InputGroup, Button} from 'react-bootstrap';
 
 export default class extends Component {
   handleSubmit(event) {
@@ -34,9 +34,14 @@ export default class extends Component {
             <Form onSubmit={this.handleSubmit.bind(this)}>
               <Form.Group className="mb-3" controlId="videoUrl">
                 <Form.Label>URL*</Form.Label>
-                <Form.Control type="url" name="url" required={true}
-                  placeholder="Enter Video URL" maxLength={2048}
-                />
+                <InputGroup>
+                  <InputGroup.Text>
+                    <i class="bi bi-globe2"></i>
+                  </InputGroup.Text>
+                  <Form.Control type="url" name="url" required={true}
+                    placeholder="Enter Video URL" maxLength={2048}
+                  />
+                </InputGroup>
               </Form.Group>
               <Form.Group className="mb-3" controlId="videoTitle">
                 <Form.Label>Title*</Form.Label>
