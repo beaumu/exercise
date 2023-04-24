@@ -31,7 +31,7 @@ class ApiVideoController extends AbstractController
     }
 
     /**
-     * Add new video
+     * Add new video and return data of added video
      *
      * @param EntityManagerInterface $entityManager
      * @param Request $request
@@ -46,6 +46,29 @@ class ApiVideoController extends AbstractController
         $video->setDescription($request->get('description'));
 
         $entityManager->persist($video);
+        $entityManager->flush();
+
+        return $this->json($video, 200, [], [
+            'groups' => ['video']
+        ]);
+    }
+
+    /**
+     * Delete video and return data of deleted video
+     *
+     * @param EntityManagerInterface $entityManager
+     * @param Request $request
+     * @return JsonResponse
+     */
+    #[Route('/api/videos/{id}', name: 'video_remove', methods: ['DELETE'])]
+    public function remove(EntityManagerInterface $entityManager, int $id): JsonResponse
+    {
+        $video = $entityManager->getRepository(Video::class)->find($id);
+        if (is_null($video)) {
+            throw $this->createNotFoundException("Video '$id' not found");
+        }
+
+        $entityManager->remove($video);
         $entityManager->flush();
 
         return $this->json($video, 200, [], [

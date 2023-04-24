@@ -32,12 +32,12 @@ export default class extends Component {
 
   handleModalSubmit(data) {
     this.submitVideo(data).then(() => {
-        return this.loadVideos();
+      return this.loadVideos();
     }).then((videos) => {
-        this.setState({
-            videos : videos,
-            showModal : false
-        });
+      this.setState({
+        videos : videos,
+        showModal : false
+      });
     });
   }
 
@@ -45,6 +45,16 @@ export default class extends Component {
     this.setState({
        showModal : true
     });
+  }
+
+  handleDeleteVideo(video) {
+    if (confirm('Are you sure?')) {
+      this.deleteVideo(video.id).then(() => {
+        this.setState({videos: this.state.videos.filter((v) => {
+          return v.id !== video.id;
+        })});
+      });
+    }
   }
 
   submitVideo(data) {
@@ -60,14 +70,16 @@ export default class extends Component {
   }
 
   loadVideos() {
-    return new Promise((resolve, reject) => {
-      fetch('/api/videos').then((response) => {
-        return response.json();
-      }).then((jsonData) => {
-        resolve(jsonData);
-      }).catch(() => {
-        reject();
-      });
+    return fetch('/api/videos').then((response) => {
+      return response.json();
+    });
+  }
+
+  deleteVideo(id) {
+    const url = '/api/videos/' + encodeURIComponent(id);
+
+    return fetch(url, {method: 'DELETE'}).then((response) => {
+      return response.json();
     });
   }
 
@@ -78,7 +90,10 @@ export default class extends Component {
         <div className="my-3 text-end">
           <Button onClick={this.handleAddModal.bind(this)}>+</Button>
         </div>
-        <AdminVideoList videos={this.state.videos} />
+        <AdminVideoList
+          videos={this.state.videos}
+          onDelete={this.handleDeleteVideo.bind(this)}
+        />
         <div className="my-3 text-end">
           <Button onClick={this.handleAddModal.bind(this)}>+</Button>
         </div>

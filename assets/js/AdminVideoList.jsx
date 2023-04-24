@@ -2,7 +2,8 @@
  * Show a list of videos for the admin to manage
  * 
  * Properties
- *   - videos  Video data to render inside list
+ *   - videos   Video data to render inside list
+ *   - onDelete Handler function to delete video
  */
 
 import React, {Component, Fragment} from 'react';
@@ -70,8 +71,17 @@ export default class extends Component {
                 <Fragment>
                   <p>{video.description}</p>
                   <Row>
-                    <Col><a href={video.url}>{video.url}</a></Col>
+                    <Col><a href={video.url} onClick={(event) => {
+                      event.stopPropagation();
+                    }}>{video.url}</a></Col>
                     <Col className="col-auto">
+                      {this.props.onDelete && (
+                        <Button href="#" variant="link" className="text-danger" onClick={(event) => {
+                          event.preventDefault();
+                          event.stopPropagation();
+                          this.props.onDelete(video);
+                        }}><i className="bi bi-x-circle-fill"></i> delete</Button>
+                      )}
                       {this.state.activeReviews.length && (
                         <Button href="#" variant="link" onClick={(event) => {
                           event.preventDefault();
