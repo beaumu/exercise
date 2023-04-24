@@ -3,7 +3,8 @@
  */
 
 import React, {Component, Fragment} from 'react';
-import {ListGroup, Button, Card, Row, Col} from 'react-bootstrap';
+import {ListGroup, Button, Card, Container, Row, Col} from 'react-bootstrap';
+import VideoImage from './VideoImage';
 import ReviewModal from './ReviewModal';
 import LikeButton from './LikeButton';
 
@@ -55,6 +56,9 @@ export default class extends Component {
           return (
             <Card key={video.id} className="my-5">
               <Card.Body>
+                <VideoImage video={video}
+                  className="img-thumbnail float-start me-3"
+                />
                 <Card.Title>{video.title}</Card.Title>
                 <Card.Text>{video.description}</Card.Text>
                 <Row>
