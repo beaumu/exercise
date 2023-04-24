@@ -12,7 +12,7 @@ use App\Entity\Video;
 /**
  * Controller class to handle video API calls
  */
-class VideoController extends AbstractController
+class ApiVideoController extends AbstractController
 {
     /**
      * Return list of videos

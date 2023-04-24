@@ -13,7 +13,7 @@ use App\Entity\Review;
 /**
  * Controller class to handle review API calls
  */
-class ReviewController extends AbstractController
+class ApiReviewController extends AbstractController
 {
     /**
      * Return list of video reviews
