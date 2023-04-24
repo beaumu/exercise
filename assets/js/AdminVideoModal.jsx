@@ -36,7 +36,7 @@ export default class extends Component {
                 <Form.Label>URL*</Form.Label>
                 <InputGroup>
                   <InputGroup.Text>
-                    <i class="bi bi-globe2"></i>
+                    <i className="bi bi-globe2"></i>
                   </InputGroup.Text>
                   <Form.Control type="url" name="url" required={true}
                     placeholder="Enter Video URL" maxLength={2048}
