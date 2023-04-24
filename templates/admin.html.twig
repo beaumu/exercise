@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <nav class="navbar navbar-expand-lg bg-black">
+        <div class="container-fluid">
+            <div class="me-auto">
+                <a class="navbar-brand text-white" href="#">Video Administion</a>
+            </div>
+            <ul class="navbar-nav">
+                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                    <a class="btn btn-warning" href="/admin/logout">
+                        <i class="bi bi-person-fill"></i>
+                        {{ app.user.username }}
+                        &times;
+                    </a>
+                    </span>
+                {% else %}}
+                    <a class="btn btn-warning" href="/">&times;</a>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
+    <main class="container">
+        {% block main %}{% endblock %}
+    </main>
+{% endblock %}

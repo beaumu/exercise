@@ -1,0 +1,8 @@
+{% extends 'admin.html.twig' %}
+
+{% block main %}
+    <div {{ react_component('AdminComponent', {
+    }) }}>
+        Loading... <i class="fas fa-cog fa-spin fa-3x"></i>
+    </div>
+{% endblock %}

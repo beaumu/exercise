@@ -1,0 +1,31 @@
+{% extends 'admin.html.twig' %}
+
+{% block title %}Admin Login{% endblock %}
+
+{% block main %}
+    {% if error %}
+        <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+    {% endif %}
+
+    <h1 class="my-3">Login as administrator</h1>
+
+    <div class="card my-5">
+        <div class="card-body">
+            <form action="{{ path('app_admin_login') }}" method="post">
+                <input type="hidden" name="_target_path" value="/admin">
+                <div class="mb-3">
+                    <label for="adminLoginUsername" class="form-label">Username</label>
+                    <input type="text" name="_username" value="{{ last_username }}"
+                        class="form-control" id="adminLoginUsername">
+                </div>
+                <div class="mb-3">
+                    <label for="adminLoginPassword" class="form-label">Password</label>
+                    <input type="password" name="_password"
+                        class="form-control" id="exampleInputPassword">
+                </div>
+                <button type="submit" class="btn btn-primary">Login</button>
+            </form>   
+        </div>
+    </div>
+
+{% endblock %}
