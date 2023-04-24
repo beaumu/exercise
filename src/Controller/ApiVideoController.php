@@ -44,6 +44,7 @@ class ApiVideoController extends AbstractController
         $video->setUrl($request->get('url'));
         $video->setTitle($request->get('title'));
         $video->setDescription($request->get('description'));
+        $video->setLiked(false);
 
         $entityManager->persist($video);
         $entityManager->flush();
